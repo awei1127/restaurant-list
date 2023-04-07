@@ -10,17 +10,25 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 
-// 設定路由
+// 設定路由-首頁
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('index', { restaurants: restaurants.results })
 })
 
+// 設定路由-餐廳詳細頁
 app.get('/restaurants/:id', (req, res) => {
-  res.render('show')
+  const restaurant = restaurants.results.find(restaurant => {
+    return restaurant.id.toString() === req.params.id
+  })
+  res.render('show', { restaurant: restaurant })
 })
 
+// 設定路由-搜尋頁
 app.get('/search', (req, res) => {
-  res.render('index')
+  const serchRestaurants = restaurants.results.filter(restaurant => {
+    return restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase()) || restaurant.category.toLowerCase().includes(req.query.keyword.toLowerCase())
+  })
+  res.render('index', { restaurants: serchRestaurants, keyword: req.query.keyword })
 })
 
 // 啟動並監聽
