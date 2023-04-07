@@ -1,6 +1,8 @@
 # Restaurant List
 A simple web application for food fanatic
 
+![Index page about Restaurant List](./public/image/snapshot.png)
+
 ## Features
 - searching restaurants by title
 - searching restaurants by category
