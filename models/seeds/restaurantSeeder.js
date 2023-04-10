@@ -1,20 +1,10 @@
+// 載入種子資料
 const restaurants = require('./restaurant.json')
 
-const mongoose = require('mongoose')
+const db = require('../../config/mongoose')
 const Reataurant = require('../restaurant') // 載入 reataurant model
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
-db.on('error', () => {
-  console.log('mongodb error!')
-})
 db.once('open', () => {
-  console.log('mongodb connected!')
-
   const restaurantSeedData = restaurants.results
   // 新增資料
   for (let i = 0; i < restaurantSeedData.length; i++) {
