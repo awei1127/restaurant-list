@@ -1,17 +1,31 @@
 <!-- search bar -->
-<div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" value="{{keyword}}" class="form-control" placeholder="輸入餐廳、分類"
-            aria-label="Restaurant Name..." value="" aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-10 col-12 mx-auto">
+      <div class="row row-cols-sm-3">
+        <form action="/search">
+          <div class="input-group">
+            <input type="text" name="keyword" value="{{keyword}}" class="form-control" placeholder="輸入餐廳、分類"
+              aria-label="Restaurant Name..." value="" aria-describedby="search-button">
+            <div class="input-group-append">
+              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
           </div>
+        </form>
+        <div class="col"></div>
+        <div class="d-grid dropdown">
+          <button class="btn btn-light dropdown-toggle text-start" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="true">
+            排序
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
         </div>
-      </form>
+
+      </div>
     </div>
   </div>
 </div>
@@ -52,16 +66,5 @@
         {{/each}}
       </div>
     </div>
-  </div>
-</div>
-
-<!-- add restaurant button-->
-<div class="position-relative">
-  <div class="position-fixed bottom-0 end-0">
-    <a href="/new">
-      <button type="button" class="btn btn-major m-5 p-5 rounded-circle">
-        <i class="fas fa-plus fa-2xl"></i>
-      </button>
-    </a>
   </div>
 </div>
