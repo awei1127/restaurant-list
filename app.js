@@ -4,6 +4,7 @@ const Restaurant = require('./models/restaurant')
 const exphbs = require('express-handlebars')
 const port = 3000
 const mongoose = require('mongoose') // 載入 mongoose
+const restaurant = require('./models/restaurant')
 
 // 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
@@ -58,6 +59,19 @@ app.post('/restaurant', (req, res) => {
   const data = req.body
   // 用Restaurant.create來把資料存到資料庫
   return Restaurant.create(data)
+    // 重新導向一覽頁面
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+// 設定路由-送出刪除請求
+app.post('/restaurant/:id/delete', (req, res) => {
+  // 用request params來拿出使用者要刪除的資料id
+  const id = req.params.id
+  // 用Restaurant.findById()來找到該筆資料
+  return Restaurant.findById(id)
+    // 用該筆資料.remove()方法來從資料庫移除該筆資料
+    .then(restaurant => restaurant.remove())
     // 重新導向一覽頁面
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
