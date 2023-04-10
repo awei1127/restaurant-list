@@ -77,6 +77,42 @@ app.post('/restaurant/:id/delete', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 設定路由-編輯餐廳頁面
+app.get('/restaurant/:id/edit', (req, res) => {
+  return Restaurant.findById(req.params.id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// 設定路由-送出編輯內容
+app.post('/restaurant/:id/save', (req, res) => {
+  // 用params拿出正在編輯的該筆資料的id
+  const id = req.params.id
+  // 用req.body拿出使用者輸入的修改後資料
+  const data = req.body
+  // 用Restaurant.findById()來找到該筆資料
+  return Restaurant.findById(id)
+    // 把使用者輸入的資料賦值給這筆找到的資料
+    .then(restaurant => {
+      // 暫時先這樣寫，待優化
+      restaurant.name = data.name
+      restaurant.name_en = data.name_en
+      restaurant.category = data.category
+      restaurant.image = data.image
+      restaurant.location = data.location
+      restaurant.phone = data.phone
+      restaurant.google_map = data.google_map
+      restaurant.rating = data.rating
+      restaurant.description = data.description
+      // 用這筆資料.save()來把資料儲存到資料庫
+      return restaurant.save()
+    })
+    // 重新導向詳細頁面
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 // 啟動並監聽
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)
