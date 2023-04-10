@@ -109,7 +109,7 @@ app.post('/restaurant/:id/save', (req, res) => {
       return restaurant.save()
     })
     // 重新導向詳細頁面
-    .then(() => res.redirect('/'))
+    .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
 
