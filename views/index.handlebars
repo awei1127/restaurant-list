@@ -23,7 +23,7 @@
       <div class="row row-cols-sm-3">
         {{#each restaurants}}
         <div class="d-flex flex-column">
-          <a href="/restaurants/{{this._id}}" class="text-secondary">
+          <a href="/restaurant/{{this._id}}" class="text-secondary">
             <div class="card mb-2">
               <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
               <div class="card-body p-3">
@@ -41,7 +41,7 @@
           <ul>
             <li class="d-flex justify-content-end mb-3">
               <a class="mx-1" href="/restaurant/{{ this._id }}/edit">Edit</a>
-              <a class="mx-1" href="/restaurants/{{ this._id }}">Detail</a>
+              <a class="mx-1" href="/restaurant/{{ this._id }}">Detail</a>
               <form class="mx-1" action="/restaurant/{{ this._id }}?_method=DELETE" method="POST"
                 style="display: inline;">
                 <button type="submit">Delete</button>
@@ -58,7 +58,7 @@
 <!-- add restaurant button-->
 <div class="position-relative">
   <div class="position-fixed bottom-0 end-0">
-    <a href="/restaurant/new">
+    <a href="/new">
       <button type="button" class="btn btn-major m-5 p-5 rounded-circle">
         <i class="fas fa-plus fa-2xl"></i>
       </button>
