@@ -16,6 +16,8 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+// 使用body-parser(以在接下來能夠解析使用者送出的post request body)
+app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static('public'))
 
@@ -42,6 +44,22 @@ app.get('/search', (req, res) => {
   return Restaurant.find({ name: new RegExp(keyword, 'i') })
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
+})
+
+// 設定路由-新增餐廳頁面
+app.get('/restaurant/new', (req, res) => {
+  res.render('new')
+})
+
+// 設定路由-送出新增資料
+app.post('/restaurant', (req, res) => {
+  // 用request body來拿出使用者輸入的資料
+  const data = req.body
+  // 用Restaurant.create來把資料存到資料庫
+  return Restaurant.create(data)
+    // 重新導向一覽頁面
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
