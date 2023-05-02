@@ -11,8 +11,14 @@ router.get('/login', (req, res) => {
 // 設定路由-送出登入表單
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: 'users/login'
+  failureRedirect: '/users/login'
 }))
+
+// 設定路由-登出
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/users/login')
+})
 
 // 設定路由-註冊頁面
 router.get('/register', (req, res) => {
