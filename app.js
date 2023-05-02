@@ -1,4 +1,5 @@
 const express = require('express')
+const session = require('express-session')
 const app = express()
 const exphbs = require('express-handlebars')
 const port = 3000
@@ -10,6 +11,12 @@ require('./config/mongoose')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 // 使用body-parser(以在接下來能夠解析使用者送出的post request body)
+
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: true,
+  saveUninitialized: true
+}))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
