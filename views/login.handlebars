@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 mt-5 m-auto">
+      <form action="/login" method="POST" class="bg-warning bg-opacity-10 p-5 rounded">
+        <h2 class="text-center mb-3">登入</h2>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">密碼</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="密碼">
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-major col-12 mt-3 mx-auto">送出</button>
+        </div>
+        <div class="mb-3">
+          <button type="button" class="btn btn-primary col-12 mx-auto">Facebook 登入</button>
+        </div>
+      </form>
+      <p class="mt-3 text-end">
+        還沒有帳號?
+        <a href="/users/register">點此註冊</a>
+      </p>
+    </div>
+  </div>
+</div>
