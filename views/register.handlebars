@@ -3,6 +3,7 @@
     <div class="col-6 mt-5 m-auto">
       <form action="/users/register" method="POST" class="bg-warning bg-opacity-10 p-5 rounded">
         <h2 class="text-center mb-3">註冊</h2>
+        {{> message}}
         <div class="mb-3">
           <label for="name" class="form-label">使用者名稱</label>
           <input type="text" class="form-control" id="name" name="name" placeholder="使用者名稱">

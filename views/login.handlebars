@@ -3,6 +3,7 @@
     <div class="col-6 mt-5 m-auto">
       <form action="/users/login" method="POST" class="bg-warning bg-opacity-10 p-5 rounded">
         <h2 class="text-center mb-3">登入</h2>
+        {{> message}}
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" name="email" placeholder="Email">
