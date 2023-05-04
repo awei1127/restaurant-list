@@ -20,12 +20,12 @@ module.exports = app => {
           return done(null, false, { message: '這個Email尚未註冊' })
         }
         // 用bcrypt檢查密碼
-        bcrypt.compare(password, user.password).then((isMatch) => {
+        return bcrypt.compare(password, user.password).then((isMatch) => {
           if (!isMatch) {
             return done(null, false, { message: '密碼錯誤' })
           }
+          return done(null, user)     // 驗證成功
         })
-        return done(null, user)     // 驗證成功
       })
       .catch(err => done(err, false))
   }))
