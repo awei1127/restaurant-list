@@ -8,35 +8,47 @@ const bcrypt = require('bcryptjs')
 db.once('open', () => {
 
   const restaurantSeedData = restaurants.results
-  const SEED_USER = {
-    name: 'root',
-    email: 'root@example.com',
-    password: '12345678'
-  }
+  const password = '12345678'
+  const SEED_USER = [
+    {
+      name: 'user1',
+      email: 'user1@example.com',
+      password: password,
+      restaurant: [0, 1, 2]
+    },
+    {
+      name: 'user2',
+      email: 'user2@example.com',
+      password: password,
+      restaurant: [3, 4, 5]
+    }
+  ]
 
   bcrypt.genSalt(10)
-    .then(salt => bcrypt.hash(SEED_USER.password, salt))
-    .then(hash => User.create({
-      name: SEED_USER.name,
-      email: SEED_USER.email,
-      password: hash
-    }))
-    .then(user => {
-      const userId = user.id
-
-      return Promise.all(Array.from({ length: 8 }, (v, i) =>
-        Reataurant.create({
-          name: restaurantSeedData[i].name,
-          name_en: restaurantSeedData[i].name_en,
-          category: restaurantSeedData[i].category,
-          image: restaurantSeedData[i].image,
-          location: restaurantSeedData[i].location,
-          phone: restaurantSeedData[i].phone,
-          google_map: restaurantSeedData[i].google_map,
-          rating: restaurantSeedData[i].rating,
-          description: restaurantSeedData[i].description,
-          userId
-        })
+    .then(salt => bcrypt.hash(password, salt))
+    .then(hash => Promise.all(Array.from(SEED_USER, seedUser =>
+      User.create({
+        name: seedUser.name,
+        email: seedUser.email,
+        password: hash
+      }))
+    ))
+    .then(users => {
+      return Promise.all(Array.from(users, (seedUser, i) =>
+        Promise.all(Array.from(SEED_USER[i].restaurant, value =>
+          Reataurant.create({
+            name: restaurantSeedData[value].name,
+            name_en: restaurantSeedData[value].name_en,
+            category: restaurantSeedData[value].category,
+            image: restaurantSeedData[value].image,
+            location: restaurantSeedData[value].location,
+            phone: restaurantSeedData[value].phone,
+            google_map: restaurantSeedData[value].google_map,
+            rating: restaurantSeedData[value].rating,
+            description: restaurantSeedData[value].description,
+            userId: seedUser._id
+          })
+        ))
       ))
     })
     .then(() => {
