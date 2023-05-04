@@ -1,14 +1,50 @@
-<h1>this is page for create</h1>
+<div class="container">
+  <div class="row">
+    <div class="card col-6 m-auto">
+      <div class="card-body">
+        <h2 class="card-title text-center">新增餐廳</h2>
 
-<form action="/restaurant" method="POST">
-  <input type="text" placeholder="name" name="name">
-  <input type="text" placeholder="name_en" name="name_en">
-  <input type="text" placeholder="category" name="category">
-  <input type="text" placeholder="image" name="image">
-  <input type="text" placeholder="location" name="location">
-  <input type="text" placeholder="phone" name="phone">
-  <input type="text" placeholder="google_map" name="google_map">
-  <input type="text" placeholder="rating" name="rating">
-  <input type="text" placeholder="description" name="description">
-  <button type="submit">Create</button>
-</form>
+        <form action="/restaurant" method="POST">
+          <div class="mb-3">
+            <label for="name" class="form-label">name</label>
+            <input type="text" placeholder="name" name="name" class="form-control" id="name">
+          </div>
+          <div class="mb-3">
+            <label for="name_en" class="form-label">name_en</label>
+            <input type="text" placeholder="name_en" name="name_en" class="form-control" id="name_en">
+          </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">category</label>
+            <input type="text" placeholder="category" name="category" class="form-control" id="category">
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">image</label>
+            <input type="text" placeholder="image" name="image" class="form-control" id="image">
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">location</label>
+            <input type="text" placeholder="location" name="location" class="form-control" id="location">
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">phone</label>
+            <input type="text" placeholder="phone" name="phone" class="form-control" id="phone">
+          </div>
+          <div class="mb-3">
+            <label for="google_map" class="form-label">google_map</label>
+            <input type="text" placeholder="google_map" name="google_map" class="form-control" id="google_map">
+          </div>
+          <div class="mb-3">
+            <label for="rating" class="form-label">rating</label>
+            <input type="text" placeholder="rating" name="rating" class="form-control" id="rating">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">description</label>
+            <input type="text" placeholder="description" name="description" class="form-control" id="description">
+          </div>
+          <button type="submit" class="btn btn-primary">新增</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
