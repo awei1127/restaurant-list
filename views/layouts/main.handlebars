@@ -24,11 +24,21 @@
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           我的餐廳清單
         </a>
-        <a href="/new">
+
+        {{#if isAuthenticated}}
+        <a href="/users/logout">
           <button type="button" class="btn btn-major">
-            新增餐廳
+            登出
           </button>
         </a>
+        {{else}}
+        <a href="/users/login">
+          <button type="button" class="btn btn-major">
+            登入
+          </button>
+        </a>
+        {{/if}}
+
       </div>
     </nav>
     <div class="banner mb-3"></div>
