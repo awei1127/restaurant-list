@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 // 設定路由-登入頁面
 router.get('/login', (req, res) => {
@@ -57,9 +58,13 @@ router.post('/register', (req, res) => {
         errors.push({ message: '這個 Email 已經註冊過了。' })
         return res.render('register', { errors, name, email, password, confirmPassword })
       }
-      User.create({ name, email, password })
-        .then(res.redirect('/users/login'))   // 註冊成功 導到登入頁面
-        .catch(err => console.error(err))
+
+      // 用bcrypt處理密碼後再建立使用者資料
+      bcrypt.genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => User.create({ name, email, password: hash })
+          .then(res.redirect('/users/login'))
+          .catch(err => console.error(err)))
     })
     .catch(err => console.error(err))
 })
