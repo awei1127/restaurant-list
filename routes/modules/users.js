@@ -10,10 +10,15 @@ router.get('/login', (req, res) => {
 })
 
 // 設定路由-送出登入表單
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/users/login'
-}))
+router.post('/login', (req, res, next) => {
+  res.locals.failure_msg = req.flash('failure_msg')
+  next()
+},
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/users/login',
+    failureMessage: true
+  }))
 
 // 設定路由-登出
 router.get('/logout', (req, res) => {

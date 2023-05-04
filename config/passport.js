@@ -11,18 +11,18 @@ module.exports = app => {
   app.use(passport.session())
 
   // 設定本地登入策略
-  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, (req, email, password, done) => {
 
     // 找使用者email 檢查密碼 有錯誤處理錯誤 沒錯誤回傳user資料
     User.findOne({ email })
       .then(user => {
         if (!user) {
-          return done(null, false, { message: '這個Email尚未註冊' })
+          return done(null, false, req.flash('failure_msg', '這個Email尚未註冊'))
         }
         // 用bcrypt檢查密碼
         return bcrypt.compare(password, user.password).then((isMatch) => {
           if (!isMatch) {
-            return done(null, false, { message: '密碼錯誤' })
+            return done(null, false, req.flash('failure_msg', '密碼錯誤'))
           }
           return done(null, user)     // 驗證成功
         })
